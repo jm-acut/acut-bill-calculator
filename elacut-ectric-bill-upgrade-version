@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Electricity Bill Calculator</title>
+  <style>
+    table, th, td {
+      border: 1px solid black;
+      border-collapse: collapse;
+    }
+    table {
+      width: 100%;
+    }
+    th, td {
+      padding: 10px;
+      text-align: center;
+    }
+    label {
+      display: inline-block;
+      width: 150px;
+      margin-bottom: 10px;
+    }
+    input {
+      padding: 10px;
+      background-color: #7eaaf2;
+      border: 1px solid black;
+    }
+    input[type="submit"] {
+      padding: 10px;
+      background-color: #7eaaf2;
+      border: 1px solid black;
+    }
+  </style>
+</head>
+<body>
+  <h1>Electricity Bill Calculator</h1>
+
+  <form id="calculatorForm">
+    <label for="month">Month </label>
+    <input type="text" id="month" name="month" required>  <br><br>
+
+    <label for="consumption">Power Consumption (kWh):</label>
+    <input type="number" id="consumption" name="consumption" required><br><br>
+
+    <label for="cost">Cost per kilowatt-hour </label>
+    <input type="number" id="cost" name="cost" required><br><br>
+
+    <input type="submit" value="Calculate">
+  </form>
+
+  <h2>Result:</h2>
+
+  <table id="resultTable">
+    <tr>
+      <th>Month</th>
+      <th>Power Consumption (kWh)</th>
+      <th>Cost per kWh</th>
+      <th>Total Bill </th>
+    </tr>
+  </table>
+
+  <script>
+    document.getElementById('calculatorForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      const month = document.getElementById('month').value;
+      const consumption = parseFloat(document.getElementById('consumption').value);
+      const cost = parseFloat(document.getElementById('cost').value);
+
+      if (isNaN(consumption) || isNaN(cost) || consumption <= 0 || cost <= 0) {
+        alert('Please enter valid positive numbers for consumption and cost.');
+        return;
+      }
+
+      const totalBill = consumption * cost;
+
+      const newRow = document.createElement('tr');
+
+      const monthCell = document.createElement('td');
+      monthCell.textContent = month;
+      newRow.appendChild(monthCell);
+
+      const consumptionCell = document.createElement('td');
+      consumptionCell.textContent = consumption;
+      newRow.appendChild(consumptionCell);
+
+      const costCell = document.createElement('td');
+      costCell.textContent = cost;
+      newRow.appendChild(costCell);
+
+      const totalBillCell = document.createElement('td');
+      totalBillCell.textContent = totalBill.toFixed(2);
+      newRow.appendChild(totalBillCell);
+
+      document.getElementById('resultTable').appendChild(newRow);
+
+      document.getElementById('month').value = '';
+      document.getElementById('consumption').value = '';
+      document.getElementById('cost').value = '';
+    });
+  </script>
+
+</body>
+</html>
