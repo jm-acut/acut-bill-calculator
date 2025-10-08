@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title> Acut Electricity Bill Calculator</title>
+</head>
+<body>
+  <h1>Electricity Bill Calculator</h1>
+
+  <form>
+    <label for="month">Month: </label>
+    <input type="text" id="month" name="month"><br><br>
+
+    <label for="consumption">Power Consumption:</label>
+    <input type="text" id="consumption" name="consumption"><br><br>
+
+    <label for="cost">Cost per kilowatt-hour:</label>
+    <input type="text" id="cost" name="cost"><br><br>
+
+    <input type="button" value="Calculate" onclick="myFunction()">
+  </form>
+
+  <h2>Result:</h2>
+
+  <style>
+    table, th, td {
+      border: 1px solid black;
+      border-collapse: collapse;
+    }
+  </style>
+
+  <table id="results_table">
+    <tr>
+      <td>Month</td>
+      <td>Power Consumption</td>
+      <td>Cost per kilowatt-hour</td>
+      <td>Result</td>
+    </tr>
+  </table>
+
+  <script>
+    function myFunction() {
+      var result_table = document.getElementById("results_table");
+      var results_row = result_table.insertRow(-1);
+
+      var month = results_row.insertCell(0);
+      var power_consumtion = results_row.insertCell(1);
+      var cost_per_kilowatt_hour = results_row.insertCell(2);
+      var results = results_row.insertCell(3);
+
+      month.innerHTML = document.getElementById("month").value;
+      power_consumtion.innerHTML = document.getElementById("consumption").value;
+      cost_per_kilowatt_hour.innerHTML = document.getElementById("cost").value;
+
+      var total = Number (document.getElementById("consumption").value) * Number (document.getElementById("cost").value);
+      results.innerHTML = total;
+    }
+  </script>
+</body>
+</html>
